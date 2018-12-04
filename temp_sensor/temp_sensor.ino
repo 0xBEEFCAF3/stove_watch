@@ -10,6 +10,12 @@ void setup()
 
 void loop() {
 
+  getFahrenheit();
+  delay(sampleTime);
+}
+
+
+double getFahrenheit(){
   temp = analogRead(tempPin);
   Serial.print("RAW DATA: ");
   Serial.print (temp);
@@ -26,6 +32,5 @@ void loop() {
   Serial.print("FAHRENHEIT: ");
   Serial.print(temp);
   Serial.println("*F");
-  delay(sampleTime);
-
-}
+  
+  }
