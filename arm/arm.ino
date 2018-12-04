@@ -8,18 +8,11 @@ int updown_flag = 0;
 int extend_flag = 0;
 int base_flag = 0;
 void setup() 
-{ 
+{
   Serial.begin(9600); 
-  
-  
-  
   //20 to 80 is our range for right_p AKA updown
-
-  
   double vals[4];
-
   visitAllHotPlates(vals);
-  
 }
 
 void visitAllHotPlates(double *vals){
@@ -41,6 +34,16 @@ void visitAllHotPlates(double *vals){
     base.write(base_p);
     delay(3000);
     /*State 2 */
+    while(updown_p > 20){
+      updown_p -= 2;
+      updown.write(updown_p);
+      delay(35);
+    }
+    while(extend_p > 40){
+      extend_p -= 2;
+      extend.write(extend_p);
+      delay(35);
+    }
     ct_p = 50;
     claw_p = 50;
     updown_p = 40; //up down, 0 is up
@@ -53,6 +56,11 @@ void visitAllHotPlates(double *vals){
     base.write(base_p);
     delay(3000);
     /*State 3 */
+    while(base_p < 45){
+      base_p += 2;
+      base.write(base_p);
+      delay(35);
+    }
     ct_p = 50;
     claw_p = 50;
     updown_p = 40; //up down, 0 is up
@@ -66,6 +74,12 @@ void visitAllHotPlates(double *vals){
     delay(3000);
 
     /*State 4 */
+    while(ct_p < 180){
+      ct_p += 2;
+      clawturn.write(ct_p);
+      delay(35);
+    }
+    
     ct_p = 180;
     claw_p = 50;
     updown_p = 30; //up down, 0 is up
