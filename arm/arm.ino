@@ -95,7 +95,7 @@ void visitAllHotPlates(double *vals){
       delay(35);
         
     }
-    
+      
     ct_p = 180;
     claw_p = 50;
     updown_p = 30; //up down, 0 is up
