@@ -32,6 +32,7 @@ void visitAllHotPlates(double *vals){
     updown.write(updown_p);
     extend.write(extend_p);
     base.write(base_p);
+    Serial.println("1");
     delay(3000);
     /*State 2 */
     while(updown_p > 20){
@@ -54,6 +55,7 @@ void visitAllHotPlates(double *vals){
     updown.write(updown_p);
     extend.write(extend_p);
     base.write(base_p);
+    Serial.println("2");
     delay(3000);
     /*State 3 */
     while(base_p < 45){
@@ -71,13 +73,27 @@ void visitAllHotPlates(double *vals){
     updown.write(updown_p);
     extend.write(extend_p);
     base.write(base_p);
+    Serial.println("3");
     delay(3000);
 
     /*State 4 */
     while(ct_p < 180){
-      ct_p += 2;
+      ct_p += 2;  
       clawturn.write(ct_p);
       delay(35);
+    }
+
+    while(extend_p > 10){
+      extend_p -= 2;  
+      extend.write(extend_p);
+      delay(35);    
+    }
+
+    while(updown_p > 30){
+      updown_p -= 2;  
+      updown.write(updown_p);
+      delay(35);
+        
     }
     
     ct_p = 180;
@@ -90,6 +106,7 @@ void visitAllHotPlates(double *vals){
     updown.write(updown_p);
     extend.write(extend_p);
     base.write(base_p);
+    Serial.println("4");
     delay(3000);
 }
  
