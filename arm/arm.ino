@@ -63,7 +63,6 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("2");
-    Serial.println(Serial.available());
     while (Serial.available()  <= 0) {
         delay(800);
     }

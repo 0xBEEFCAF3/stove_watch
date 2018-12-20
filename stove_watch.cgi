@@ -1,6 +1,5 @@
 #!/usr/bin/python
 """
-
 @author: Armin
 """
 from serial import Serial 
@@ -64,8 +63,8 @@ def main():
 	GAS_ERROR_VAL = -20
 	TEMP_ERROR_VAL = -20
 
-	device_port = '/dev/ttyACM1' 
-	arm_port = '/dev/ttyUSB0' 
+	device_port = 'COM5' 
+	arm_port = 'COM4' 
 
 	arm_serial = Serial(arm_port, 9600)
 	device_serial = Serial(device_port, 9600)
@@ -83,5 +82,5 @@ def main():
 	arm_serial.close()
 
 if __name__ == '__main__':
-	#main()
-	formatHTML(True, [1,2])
+	main()
+	#formatHTML(True, [1,2])
