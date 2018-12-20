@@ -33,12 +33,12 @@ void visitAllHotPlates(double *vals){
     updown.write(updown_p);
     extend.write(extend_p);
     base.write(base_p);
-    Serial.println("1");
-    
-    while (Serial.available() < 0) {
+    while (Serial.available() <= 0) {
         delay(800);
     }
     state_status = Serial.read();
+    Serial.println("1");
+    //Serial.flush();
     
     //delay(3000);
     /*State 2 */
@@ -63,7 +63,8 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("2");
-    while (Serial.available() < 0) {
+    Serial.println(Serial.available());
+    while (Serial.available()  <= 0) {
         delay(800);
     }
     state_status = Serial.read();
@@ -85,7 +86,7 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("3");
-    while (Serial.available() < 0) {
+    while (Serial.available()  <= 0) {
         delay(800);
     }
     state_status = Serial.read();
