@@ -15,7 +15,7 @@ void loop() {
 
   if (Serial.available() > 0) {
     // read the incoming byte:
-    //incomingByte = Serial.read();
+    int incomingByte = Serial.read();
     cur_temp = get_temp();
     cur_gas = get_gas();
     JSON_object = "{'temp':"+(String)cur_temp+",'gas':"+(String)cur_gas+"}";

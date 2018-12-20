@@ -7,6 +7,7 @@ int ct_p, extend_p, updown_p, claw_p, base_p;
 int updown_flag = 0;
 int extend_flag = 0;
 int base_flag = 0;
+int state_status;
 void setup() 
 {
   Serial.begin(9600); 
@@ -33,7 +34,13 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("1");
-    delay(3000);
+    
+    while (Serial.available() < 0) {
+        delay(800);
+    }
+    state_status = Serial.read();
+    
+    //delay(3000);
     /*State 2 */
     while(updown_p > 20){
       updown_p -= 2;
@@ -56,7 +63,11 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("2");
-    delay(3000);
+    while (Serial.available() < 0) {
+        delay(800);
+    }
+    state_status = Serial.read();
+    //delay(3000);
     /*State 3 */
     while(base_p < 45){
       base_p += 2;
@@ -74,7 +85,11 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("3");
-    delay(3000);
+    while (Serial.available() < 0) {
+        delay(800);
+    }
+    state_status = Serial.read();
+    //delay(3000);
 
     /*State 4 */
     while(ct_p < 180){
@@ -107,7 +122,7 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("4");
-    delay(3000);
+    //delay(3000);
 }
  
 void loop() 
