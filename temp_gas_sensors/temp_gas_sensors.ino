@@ -18,16 +18,16 @@ void loop() {
 
 
 
-double get_gas(){
+float get_gas(){
   int i;
   float gas_value;
   for (i = 0 ; i < 50 ; i++) {
     gas_value = gas_value + analogRead(gas_sensor); //Add analog values of sensor 500 times
   }
   gas_value = gas_value/50;
-  Serial.print("Gas Value: ");
-  Serial.println(gas_value);
-  
+  // Serial.print("Gas Value: ");
+  // Serial.println(gas_value);
+  return gas_value
 }
 
 
