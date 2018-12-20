@@ -18,7 +18,9 @@ void loop() {
     int incomingByte = Serial.read();
     cur_temp = get_temp();
     cur_gas = get_gas();
+    
     JSON_object = "{'temp':"+(String)cur_temp+",'gas':"+(String)cur_gas+"}";
+    Serial.print((String)cur_gas + "::");
     Serial.println(JSON_object);
   }
     delay(sample_time);    
@@ -26,7 +28,7 @@ void loop() {
 
 float get_gas(){
   int i;
-  float gas_value;
+  float gas_value = 0;
   for (i = 0 ; i < 50 ; i++) {
     gas_value = gas_value + analogRead(gas_sensor); //Add analog values of sensor 500 times
   }
@@ -57,4 +59,4 @@ float get_temp(){
 
   return temp;
   
-  }
+}

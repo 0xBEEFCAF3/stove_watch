@@ -12,6 +12,10 @@ void setup()
 {
   Serial.begin(9600); 
   //20 to 80 is our range for right_p AKA updown
+  while (Serial.available() <= 0) {
+        delay(800);
+  }
+  state_status = Serial.read();
   double vals[4];
   visitAllHotPlates(vals);
 }
@@ -122,7 +126,8 @@ void visitAllHotPlates(double *vals){
     extend.write(extend_p);
     base.write(base_p);
     Serial.println("4");
-    //delay(3000);
+    delay(3000);
+    setup();
 }
  
 void loop() 

@@ -63,8 +63,8 @@ def main():
 	GAS_ERROR_VAL = -20
 	TEMP_ERROR_VAL = -20
 
-	device_port = 'COM5' 
-	arm_port = 'COM4' 
+	device_port = '/dev/ttyACM4' 
+	arm_port = '/dev/ttyUSB0' 
 
 	arm_serial = Serial(arm_port, 9600)
 	device_serial = Serial(device_port, 9600)
@@ -72,11 +72,26 @@ def main():
 	response = []
 
 	######## Synchronize #########
-	state = arm_serial.readline()
-	while  state != "-1":
-		device_vals = device_serial.readline()
+	state  = -1
+	#arm_serial.write("1\r\n".encode())
+	#device_serial.readline()
+	while  state != "4":
+		print("running loop")
+		device_serial.write("1\r\n".encode())
+		#time.sleep(2)
+		device_vals = "{}"
+		try:
+			device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
+		except :
+			print("Malformaties detected	")
+			continue
+
+		print("device vals" , device_vals)
 		response.append(json.loads(device_vals))
-		state = arm_serial.readline()
+		arm_serial.write("1\r\n".encode())
+		state = arm_serial.readline().split("\r")[0]
+		print("arm state: ", state)
+		#time.sleep(5)
 			
 	device_serial.close()
 	arm_serial.close()
