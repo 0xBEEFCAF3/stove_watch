@@ -82,8 +82,8 @@ def main():
 	TIME_BEFORE_CHECK = 15
 
 
-	device_port = '/dev/ttyACM6' 
-	arm_port = '/dev/ttyUSB1' 
+	device_port = '/dev/ttyACM0' 
+	arm_port = '/dev/ttyUSB0' 
 
 	arm_serial = Serial(arm_port, 9600)
 	device_serial = Serial(device_port, 9600)
