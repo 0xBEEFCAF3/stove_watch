@@ -22,7 +22,7 @@ void loop() {
     JSON_object = "{'temp':"+(String)cur_temp+",'gas':"+(String)cur_gas+"}";
     Serial.print((String)cur_gas + "::");
     Serial.println(JSON_object);
-  }
+  } 
     delay(sample_time);    
 }
 

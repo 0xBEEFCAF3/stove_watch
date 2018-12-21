@@ -1,4 +1,7 @@
 #!/usr/bin/python
+
+
+
 """
 @author: Armin
 """
@@ -56,7 +59,11 @@ def formatHTML(isON, results):
 	</html>"""
 	print(html)
 
-
+def isON(vals):
+	for val in vals:
+		if(val["temp"] > 80 or val["gas"]>200):
+			return True
+	return False
 
 def main():
 	TIME_BEFORE_CHECK = 15
@@ -73,28 +80,84 @@ def main():
 
 	######## Synchronize #########
 	state  = -1
-	#arm_serial.write("1\r\n".encode())
-	#device_serial.readline()
-	while  state != "4":
-		print("running loop")
-		device_serial.write("1\r\n".encode())
-		#time.sleep(2)
-		device_vals = "{}"
-		try:
-			device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
-		except :
-			print("Malformaties detected	")
-			continue
 
-		print("device vals" , device_vals)
-		response.append(json.loads(device_vals))
-		arm_serial.write("1\r\n".encode())
-		state = arm_serial.readline().split("\r")[0]
-		print("arm state: ", state)
-		#time.sleep(5)
-			
+  #arm_serial.write("1\r\n".encode())
+	# device_serial.write("1\r\n".encode())
+	# device_serial.readline()	
+
+	# while  state != "4":
+	# 	print("running loop")
+	# 	device_serial.write("1\r\n".encode())
+	# 	device_vals = "{}"
+	# 	try:
+	# 		device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
+	# 		print("Just read: ", device_vals)
+	# 	except :
+	# 		print("Malformaties detected	")
+	# 		continue
+
+	# 	print("device vals" , device_vals)
+	# 	response.append(json.loads(device_vals))
+
+	# 	arm_serial.write("1\r\n".encode())
+	# 	print("JUST WROTE TO ARM")
+	# 	state = arm_serial.readline().split("\r")[0]
+
+	# 	print("arm state: ", state)
+	# 	#time.sleep(5)
+
+  ####STATE 1
+	arm_serial.write("1\n".encode())
+	device_serial.write("1\r\n".encode())
+	try:
+			device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
+			print("Just read: state 1", device_vals)
+	except :
+			print("Malformaties detected	")
+	response.append(json.loads(device_vals))	
+	####STATE 2
+	state = arm_serial.readline().split("\r")[0]
+	arm_serial.write("1\n".encode())
+	state = arm_serial.readline().split("\r")[0]
+	print("THE CURRENT STATE:::: ", state)
+	device_serial.write("1\r\n".encode())
+	try:
+			device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
+			print("Just read:  state2", device_vals)
+	except :
+			print("Malformaties detected	")
+	response.append(json.loads(device_vals))	
+
+	####STATE 3
+	arm_serial.write("1\n".encode())
+	state = arm_serial.readline().split("\r")[0]
+	print("THE CURRENT STATE:::: ", state)
+	device_serial.write("1\r\n".encode())
+	try:
+			device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
+			print("Just read: state3", device_vals)
+	except :
+			print("Malformaties detected	")
+	response.append(json.loads(device_vals))	
+
+	####STATE 4
+	arm_serial.write("1\n".encode())
+	state = arm_serial.readline().split("\r")[0]
+	print("THE CURRENT STATE:::: ", state)
+	device_serial.write("1\r\n".encode())
+	try:
+			device_vals = device_serial.readline().split("::")[1].split("\r")[0].replace("'","\"") #
+			print("Just read: state4", device_vals)
+	except :
+			print("Malformaties detected	")
+	response.append(json.loads(device_vals))	
+
+#close serial connection
 	device_serial.close()
 	arm_serial.close()
+
+	print("DONE", response)
+	print(isON(response))
 
 if __name__ == '__main__':
 	main()

@@ -17,10 +17,10 @@ void setup()
   }
   state_status = Serial.read();
   double vals[4];
-  visitAllHotPlates(vals);
+  visitAllHotPlates();
 }
 
-void visitAllHotPlates(double *vals){
+void visitAllHotPlates(){
     claw.attach(9);  // attaches the servo on pin 11 to the middle object
     clawturn.attach(10);  
     base.attach(11);
@@ -44,7 +44,7 @@ void visitAllHotPlates(double *vals){
     Serial.println("1");
     //Serial.flush();
     
-    //delay(3000);
+    delay(3000);
     /*State 2 */
     while(updown_p > 20){
       updown_p -= 2;
@@ -71,7 +71,7 @@ void visitAllHotPlates(double *vals){
         delay(800);
     }
     state_status = Serial.read();
-    //delay(3000);
+    delay(3000);
     /*State 3 */
     while(base_p < 45){
       base_p += 2;
@@ -93,7 +93,7 @@ void visitAllHotPlates(double *vals){
         delay(800);
     }
     state_status = Serial.read();
-    //delay(3000);
+    delay(3000);
 
     /*State 4 */
     while(ct_p < 180){
